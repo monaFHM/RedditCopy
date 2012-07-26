@@ -30,9 +30,9 @@ describe "Home index spec" do
     end
 
     it "shows the Username and an Outlog Link in the sidebar when somebody is logged in" do
-      #visit '/home/index'
-      assert page.has_content?('Log out')
-      assert page.has_content?(@user.username)
+      visit '/home/index'
+      #page.should have_selector('a', :text => 'Log out')
+      page.should have_selector('h3', :text => "Hello, #{@user.username}")
     end
 
 
