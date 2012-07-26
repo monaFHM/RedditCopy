@@ -1,0 +1,77 @@
+!!!
+%html
+  %head
+    %title>Reddit
+    
+    %meta{:charset => "utf-8"}
+    %meta{:content => "a funny link sharing zone", :name => "description"}
+    %meta{:content => "moi", :name => "author"}    
+    %link{:href => "/css/bootstrap.css", :rel => "stylesheet"}
+    /[if lt IE 9]
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application" 
+    = csrf_meta_tags
+
+    :javascript
+      $(document).ready(function(){
+        $('.navbar').scrollspy();
+      });
+      
+
+  %body{:"data-spy"=>"scroll" , :"data-target"=>"#sidenavi" ,:"data-offset"=>"0"}
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => "#"} Project name
+          .nav-collapse
+            %ul.nav
+              %li.active
+                = link_to "Home", home_index_path
+              %li
+                = link_to "About", home_about_path
+              %li
+                = link_to "Contact", home_contact_path
+    .container
+      .row
+        .span3
+          -if user_signed_in?
+            %h3="Hello, #{current_user.username}"
+
+          %ul#sidenavi{:class=>"nav nav-list"}
+            %li.nav-header
+            -if user_signed_in?
+              %li.nav-header
+                User Sessions
+              %li.active
+                = link_to "Profil", edit_user_registration_path
+              %li
+                = link_to "Log out", destroy_user_session_path, :method => "delete"
+            -else
+              %li.nav-header
+                Einloggen
+              %li= link_to "Log in", new_user_session_path
+              %li= link_to "Register", new_user_registration_path
+            -if content_for?(:sidebar_menu_items)
+              = yield(:sidebar_menu_items)
+
+            LoremLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .span9
+          = yield
+      %hr
+      .row
+        .span12
+          %footer
+            %p
+              (C) 2012
+
