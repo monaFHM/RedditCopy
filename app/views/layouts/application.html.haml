@@ -44,9 +44,10 @@
             %div{:class=>"alert alert-success"}
               %a.close{:"data-dismiss"=>"alert", :href=>"#"}="×"
               %p=notice
-            %p.notice=notice
           -if alert
-            %p.alert=alert
+            %div{:class=>"alert alert-error"}
+              %a.close{:"data-dismiss"=>"alert", :href=>"#"}="×"
+              %p=alert
       .row
         .span3
           -if user_signed_in?

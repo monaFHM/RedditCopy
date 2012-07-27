@@ -9,7 +9,7 @@ describe "Post" do
 
     it "should have unique user name and email" do
       User.new(:username => "albert", :email=> "albert@gmail.com", :password => "1234", :password_confirmation => "1234")
-      User.new(:username => "albert", :email=> "albert@gmail.com", :password => "1234", :password_confirmation => "1234").should_not be_valid
+      User.new(:username => "albert", :email=> "albert@gmail.com", :password => "1234", :password_confirmation => "1234").should_not be_valid 
     end
 
   end

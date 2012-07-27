@@ -5,15 +5,14 @@ include TestHelper
 describe UserprofileController do
   fixtures :users
 
-  before :each do
-    login
-  end
 
   describe "GET 'index'" do
-    it "returns http success" do
+
+    it "should redirect if not signed in" do
       get 'index'
-      response.should be_success
+      response.should be_redirect
     end
+
   end
 
 end

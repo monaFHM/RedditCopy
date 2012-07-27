@@ -5,7 +5,7 @@ module TestHelper
 
     def login
         @user = users(:franz)
-        visit '/users/sign_in'
+        visit new_user_session_path
         fill_in 'Email', :with => @user.email
         fill_in 'Password', :with => 'test1234'
         click_button 'Sign in'
