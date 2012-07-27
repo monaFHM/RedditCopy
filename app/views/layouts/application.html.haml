@@ -6,11 +6,11 @@
     %meta{:charset => "utf-8"}
     %meta{:content => "a funny link sharing zone", :name => "description"}
     %meta{:content => "moi", :name => "author"}    
-    %link{:href => "/css/bootstrap.css", :rel => "stylesheet"}
     /[if lt IE 9]
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-
     = stylesheet_link_tag "application", :media => "all"
+    /= stylesheet_link_tag "bootstrap_and_overrides.css"
+    /= stylesheet_link_tag "application.css"
     = javascript_include_tag "application" 
     = csrf_meta_tags
 
@@ -28,7 +28,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#"} Project name
+          %a.brand{:href => "#"} Reddit Clone
           .nav-collapse
             %ul.nav
               %li.active
@@ -39,33 +39,36 @@
                 = link_to "Contact", home_contact_path
     .container
       .row
+        .span12        
+          -if notice
+            %div{:class=>"alert alert-success"}
+              %a.close{:"data-dismiss"=>"alert", :href=>"#"}="×"
+              %p=notice
+            %p.notice=notice
+          -if alert
+            %p.alert=alert
+      .row
         .span3
           -if user_signed_in?
-            %h3="Hello, #{current_user.username}"
+            %h3="#{current_user.username}"
 
           %ul#sidenavi{:class=>"nav nav-list"}
             %li.nav-header
+              YOUR ACCOUNT
             -if user_signed_in?
-              %li.nav-header
-                User Sessions
-              %li.active
-                = link_to "Profil", edit_user_registration_path
               %li
-                = link_to "Log out", destroy_user_session_path, :method => "delete"
+                = link_to "Profile", userprofile_index_path
+              %li
+                = link_to "Account Settings", edit_user_registration_path
+              %li
+                = link_to "Sign out", destroy_user_session_path, :method => "delete"
             -else
-              %li.nav-header
-                Einloggen
-              %li= link_to "Log in", new_user_session_path
-              %li= link_to "Register", new_user_registration_path
+              %li= link_to "Sign in", new_user_session_path
+              %li= link_to "Sign up", new_user_registration_path
+            %li.divider
             -if content_for?(:sidebar_menu_items)
               = yield(:sidebar_menu_items)
 
-            LoremLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         .span9
           = yield
       %hr

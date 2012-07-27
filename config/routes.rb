@@ -1,4 +1,6 @@
 Reddit::Application.routes.draw do
+  get "userprofile/index"
+
   get "home/index"
 
   get "home/about"

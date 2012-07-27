@@ -7,6 +7,9 @@ require 'rspec/autorun'
 require 'capybara/rspec'
 require 'capybara/rails'
 
+require 'pry'
+require_relative 'test_helper_module.rb'
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
